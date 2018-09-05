@@ -1,5 +1,3 @@
-// THIS IS A TEST
-
 const jobRoleSelectList = document.getElementById('title');
 const otherInput = document.getElementById('other-title');
 const shirtColorList = document.getElementById('color');
