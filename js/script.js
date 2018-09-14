@@ -1,3 +1,4 @@
+//TEST FOR GITHUB
 const jobRoleSelectList = document.getElementById('title');
 const otherInput = document.getElementById('other-title');
 const shirtColorList = document.getElementById('color');
@@ -18,7 +19,7 @@ function showHideOtherInput() {
 }
 
 
-// Function by the Red Man
+// Function by Redmond
 function shirtThemeAndColor() {
     let e = document.getElementById('design');
     let selectedValue = e.options[e.selectedIndex].value;
@@ -46,37 +47,46 @@ function shirtThemeAndColor() {
     }
   }
 
+// Register for Activities. This will use some of the same ideas as the functions above for the shirt
+addEventListener('change', (e) => {
+  const checkbox = event.target;
+  const checked = checkbox.checked;
+  const listItem = checkbox.parentNode;
 
+  if (checked) {
+      listItem.className = 'selected';
+      } else {
+        listItem.className = '';
+      }
 
+      if (checkbox.className === 'selected') {
 
-
-
-
-
-
-
-
-
-
-
-
-// // Function to show the appropriate colors when a design is selected
-// function jsPuns() {
-//     // Stores the selected value of the design list
-//     const selectedValue = designSelectList.value;
-//     // Selects entire design menu
-//     const designSelectList = document.getElementById('design');
-//     // Flop these two above things around?
-//     // These two variables select and store the color options for each shirt design
-//     const jsPuns = document.getElementsByClassName('jsPuns');
-//     const iHeartJs = document.getElementsByClassName('iHeartJs');
-
-
-
-//     // if(selectedValue === 'Theme - JS Puns') {
-//     //     shirtColorList.style.display(jsPuns);
-//     // } if (selectedValue === 'I &#9829; JS') {
-//     //     shirtColorList.style.display(iHeartJs);
-//     // } else {
-//     //     shirtColorList.style.display(jsPuns + iHeartJs);
+      } else {
     
+      }
+  });
+
+
+  const JSFW = document.getElementById('JSFW');
+  const EW = document.getElementById('EW');
+
+JSFW.addEventListener('change', (e) => {
+  if(JSFW.checked){
+      EW.style.display = 'none';
+  } else {
+    EW.style.display = 'block';
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
