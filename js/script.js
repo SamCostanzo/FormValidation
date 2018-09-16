@@ -23,17 +23,18 @@ function showHideOtherInput() {
 function shirtThemeAndColor() {
     let e = document.getElementById('design');
     let selectedValue = e.options[e.selectedIndex].value;
-
+    let pleaseSelectTshirt = document.getElementById('pleaseSelectTshirt');
     let jsPuns = document.getElementsByClassName('jsPuns');
     let iHeartJs = document.getElementsByClassName('iHeartJs');
 
     if ( selectedValue === 'js puns') {
-      // console.log('jsPuns');
       toggleDisable(jsPuns, false);
       toggleDisable(iHeartJs, true);
+      pleaseSelectTshirt.setAttribute('disabled', true);
     } else if ( selectedValue === 'heart js') {
       toggleDisable(jsPuns, true);
       toggleDisable(iHeartJs, false);
+      pleaseSelectTshirt.setAttribute('disabled', true);
     } else {
       toggleDisable(jsPuns, false);
       toggleDisable(iHeartJs, false);
@@ -77,13 +78,21 @@ colorMenu.style.display = 'none';
 
 // Function to show/hide the color menu only show when a T-shirt design is selected
 function showHideColorMenu() {
+    const heart = document.getElementById('heart');
+    const puns = document.getElementById('puns');
+    const selectTheme = document.getElementById('selectTheme');
     const selectedValue = designSelect.value;
-    if(selectedValue === 'Theme - JS Puns') {
+    if(selectedValue === puns, heart) {
         colorMenu.style.display = 'block';
+        selectTheme.setAttribute('disabled', true);
     } else {
         colorMenu.style.display = 'none';
     }
 }
+
+designSelect.addEventListener('change', () => {
+  showHideColorMenu();
+});
 
 
 

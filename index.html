@@ -56,17 +56,17 @@
 
         <div>
           <label for="design">Design:</label>
-          <select id="design" name="user_design" onchange = shirtThemeAndColor(); onchange = showHideColorMenu();>
-            <option>Select Theme</option>
-            <option value="js puns">Theme - JS Puns</option>
-            <option value="heart js">Theme - I &#9829; JS</option>
+          <select id="design" name="user_design" onchange = shirtThemeAndColor();>
+            <option id="selectTheme">Select Theme</option>
+            <option value="js puns" id="puns">Theme - JS Puns</option>
+            <option value="heart js" id="heart">Theme - I &#9829; JS</option>
           </select>
         </div>
 
         <div id="colors-js-puns" class="">
           <label for="color">Color:</label>
           <select id="color">
-            <option value="cornflowerblue" class="jsPuns">Please select a T-shirt theme</option>
+            <option value="cornflowerblue" class="jsPuns" id="pleaseSelectTshirt">Please select a T-shirt theme</option>
             <option value="cornflowerblue" class="jsPuns">Cornflower Blue (JS Puns shirt only)</option>
             <option value="darkslategrey" class="jsPuns">Dark Slate Grey (JS Puns shirt only)</option> 
             <option value="gold" class="jsPuns">Gold (JS Puns shirt only)</option> 
