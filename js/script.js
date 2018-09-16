@@ -1,4 +1,4 @@
-//TEST FOR GITHUB
+// TEST ONE
 const jobRoleSelectList = document.getElementById('title');
 const otherInput = document.getElementById('other-title');
 const shirtColorList = document.getElementById('color');
@@ -28,7 +28,7 @@ function shirtThemeAndColor() {
     let iHeartJs = document.getElementsByClassName('iHeartJs');
 
     if ( selectedValue === 'js puns') {
-      console.log('jsPuns');
+      // console.log('jsPuns');
       toggleDisable(jsPuns, false);
       toggleDisable(iHeartJs, true);
     } else if ( selectedValue === 'heart js') {
@@ -41,51 +41,49 @@ function shirtThemeAndColor() {
   }
 
   function toggleDisable(element, value) {
-    console.log(element);
+    // console.log(element);
     for (var i = 0; i < element.length; i++) {
       element[i].disabled = value;
     }
   }
 
 // Register for Activities. This will use some of the same ideas as the functions above for the shirt
-addEventListener('change', (e) => {
-  const checkbox = event.target;
-  const checked = checkbox.checked;
-  const listItem = checkbox.parentNode;
-
-  if (checked) {
-      listItem.className = 'selected';
-      } else {
-        listItem.className = '';
-      }
-
-      if (checkbox.className === 'selected') {
-
-      } else {
-    
-      }
-  });
-
-
+//JSWF stands for Javascript Frameworks workshop and EW for Express workshop
   const JSFW = document.getElementById('JSFW');
   const EW = document.getElementById('EW');
 
-JSFW.addEventListener('change', (e) => {
+JSFW.addEventListener('change', () => {
   if(JSFW.checked){
-      EW.style.display = 'none';
+      EW.setAttribute('disabled', true);
   } else {
-    EW.style.display = 'block';
+      EW.removeAttribute('disabled');
   }
+});
 
+EW.addEventListener('change', () => {
+  if(EW.checked){
+    JSFW.setAttribute('disabled', true);
+  } else {
+    JSFW.removeAttribute('disabled');
+  }
 });
 
 
+// Hides the "color" select menu(the div in this case) 
+const colorMenu = document.getElementById('colors-js-puns');
+const designSelect = document.getElementById('design');
 
+colorMenu.style.display = 'none';
 
-
-
-
-
+// Function to show/hide the color menu only show when a T-shirt design is selected
+function showHideColorMenu() {
+    const selectedValue = designSelect.value;
+    if(selectedValue === 'Theme - JS Puns') {
+        colorMenu.style.display = 'block';
+    } else {
+        colorMenu.style.display = 'none';
+    }
+}
 
 
 

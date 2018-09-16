@@ -56,7 +56,7 @@
 
         <div>
           <label for="design">Design:</label>
-          <select id="design" name="user_design" onchange = shirtThemeAndColor();>
+          <select id="design" name="user_design" onchange = shirtThemeAndColor(); onchange = showHideColorMenu();>
             <option>Select Theme</option>
             <option value="js puns">Theme - JS Puns</option>
             <option value="heart js">Theme - I &#9829; JS</option>
@@ -66,6 +66,7 @@
         <div id="colors-js-puns" class="">
           <label for="color">Color:</label>
           <select id="color">
+            <option value="cornflowerblue" class="jsPuns">Please select a T-shirt theme</option>
             <option value="cornflowerblue" class="jsPuns">Cornflower Blue (JS Puns shirt only)</option>
             <option value="darkslategrey" class="jsPuns">Dark Slate Grey (JS Puns shirt only)</option> 
             <option value="gold" class="jsPuns">Gold (JS Puns shirt only)</option> 
@@ -76,17 +77,29 @@
         </div>                
       </fieldset>
 
-      <fieldset class="activities">
-        <legend>Register for Activities</legend>
-        <label><input type="checkbox" class="checkbox" value="1" name="all"> Main Conference — $200</label>
-        <label><input type="checkbox" class="checkbox" id="JSFW" value="2" name="js-frameworks"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
-        <label><input type="checkbox" class="checkbox" value="3" name="js-libs"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
-        <label><input type="checkbox" class="checkbox" id="EW" value="4" name="express"> Express Workshop — Tuesday 9am-12pm, $100</label>
-        <label><input type="checkbox" class="checkbox" value="5" name="node"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
-        <label><input type="checkbox" class="checkbox" value="6" name="build-tools"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
-        <label><input type="checkbox" class="checkbox" value="7" name="npm"> npm Workshop — Wednesday 1pm-4pm, $100</label>
-                  	
-      </fieldset>
+      
+          <fieldset class="activities">
+            <legend>Register for Activities</legend>
+            <label><input type="checkbox" value="200" name="choice"> Main Conference — $200</label>
+            <label><input type="checkbox" value="100" name="choice" id="JSFW"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice" id="EW"> Express Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
+            <label><input type="checkbox" value="100" name="choice"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice"> npm Workshop — Wednesday 1pm-4pm, $100</label>
+
+
+            <!-- Just to save the 'names' if we need to add them back in later -->
+            <!-- <label><input type="checkbox" value="200" name="all"> Main Conference — $200</label>
+            <label><input type="checkbox" value="100" name="js-frameworks" id="JSFW" > JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="js-libs"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+            <label><input type="checkbox" value="100" name="express" id="EW"> Express Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="node"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
+            <label><input type="checkbox" value="100" name="build-tools"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="npm"> npm Workshop — Wednesday 1pm-4pm, $100</label> -->
+                        
+          </fieldset>
+      
       <fieldset>
         <legend>Payment Info</legend>
 
