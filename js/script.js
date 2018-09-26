@@ -48,26 +48,6 @@ function shirtThemeAndColor() {
     }
   }
 
-// Register for Activities. This will use some of the same ideas as the functions above for the shirt
-//JSWF stands for Javascript Frameworks workshop and EW for Express workshop
-  const JSFW = document.getElementById('JSFW');
-  const EW = document.getElementById('EW');
-
-JSFW.addEventListener('change', () => {
-  if(JSFW.checked){
-      EW.setAttribute('disabled', true);
-  } else {
-      EW.removeAttribute('disabled');
-  }
-});
-
-EW.addEventListener('change', () => {
-  if(EW.checked){
-    JSFW.setAttribute('disabled', true);
-  } else {
-    JSFW.removeAttribute('disabled');
-  }
-});
 
 
 // Hides the "color" select menu(the div in this case) 
@@ -95,5 +75,47 @@ designSelect.addEventListener('change', () => {
 });
 
 
+// Register for Activities. 
+// JSFW stands for Javascript Frameworks workshop and EW for Express workshop
+// Disables EW if JSFW is checked and vice versa...because they are at the same time.
+const JSFW = document.getElementById('JSFW');
+const EW = document.getElementById('EW');
+
+JSFW.addEventListener('change', () => {
+if(JSFW.checked){
+    EW.setAttribute('disabled', true);
+} else {
+    EW.removeAttribute('disabled');
+}
+});
+
+EW.addEventListener('change', () => {
+if(EW.checked){
+  JSFW.setAttribute('disabled', true);
+} else {
+  JSFW.removeAttribute('disabled');
+}
+});
 
 
+// Running total for activities section
+const checkbox = document.querySelectorAll('.checkbox');
+// Looping through all the items in the querySelectorAll array. This is because we can't just add and eventlistener on an array, we need to use a loop to atach it to each item inside.
+for (var i = 0; i < checkbox.length; i++) {
+  checkbox[i].addEventListener('change', () => {
+      checkTotal()
+  });
+}
+
+function checkTotal() {
+  document.checkbox.total.value = '';
+  var sum = 0;
+  for (i=0;i<document.checkbox.choice.length;i++) {
+    if (document.checkbox.choice[i].checked) {
+      sum = sum + parseInt(document.checkbox.choice[i].value);
+    }
+  }
+  document.checkbox.total.value = sum;
+}
+
+// GITHUB TEST
