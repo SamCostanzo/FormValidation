@@ -99,23 +99,15 @@ if(EW.checked){
 
 
 // Running total for activities section
-const checkbox = document.querySelectorAll('.checkbox');
-// Looping through all the items in the querySelectorAll array. This is because we can't just add and eventlistener on an array, we need to use a loop to atach it to each item inside.
-for (var i = 0; i < checkbox.length; i++) {
-  checkbox[i].addEventListener('change', () => {
-      checkTotal()
-  });
-}
+const checkbox = document.querySelectorAll('checkbox');
+const activities = document.getElementsByClassName('activities');
+const costLabel = document.createElement('label');
+// Append costLabel to activities
+const cost = ''; 
 
-function checkTotal() {
-  document.checkbox.total.value = '';
-  var sum = 0;
-  for (i=0;i<document.checkbox.choice.length;i++) {
-    if (document.checkbox.choice[i].checked) {
-      sum = sum + parseInt(document.checkbox.choice[i].value);
-    }
-  }
-  document.checkbox.total.value = sum;
-}
+activities.addEventListener('change', () => {
+  console.log('test');
+});
 
-// GITHUB TEST
+
+
