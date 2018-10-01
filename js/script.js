@@ -151,9 +151,13 @@ const RegisterButton = document.getElementById('registerButton');
 
 // Function to check for the top nameField being left blank
 function validation() {
-if(nameField.value.length == 0) {
+const label = document.createElement('label');
+label.textContent = 'Please enter your name';
+  if(nameField.value.length == 0) {
   nameField.style.borderColor = 'red';
+  nameField.appendChild(label);
   console.log('It works!');
+  preventDefault()
 }
 }
 
@@ -161,5 +165,4 @@ if(nameField.value.length == 0) {
 // Again, putting the function above into an event listener on the register button at the bottom.
 RegisterButton.addEventListener('click', () => {
   validation()
-  preventDefault()
 });
