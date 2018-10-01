@@ -156,6 +156,7 @@ label.textContent = 'Please enter your name';
   if(nameField.value.length == 0) {
   nameField.style.borderColor = 'red';
   nameField.appendChild(label);
+  alert('Please check the form again. Some sections can not be left blank');
   console.log('It works!');
   preventDefault()
 }
@@ -166,3 +167,4 @@ label.textContent = 'Please enter your name';
 RegisterButton.addEventListener('click', () => {
   validation()
 });
+
