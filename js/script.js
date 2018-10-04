@@ -168,6 +168,12 @@ if(emailInput.value.length == 0) {
 
 // REMINDER that we are still inside the validation function :)
 
+
+// TRY THIS! Try warping from here to line 220 in a if statement so it only runs if credit card option is selected.
+// const paymentSelect = document.getElementById('x');
+const selectedValue = paymentSelect.value;
+// IF VALIDATION BREAKS, GET RID OF IF SATEMENT ON LINE BELOW
+if(selectedValue == 'credit card'){
 // If credit card option is chosen, user must provide a credit card number, zip code, and three digit CVV
 // Selecting the three inputs
 const creditCardNumberInput = document.getElementById('cc-num');
@@ -214,8 +220,8 @@ if(userCvv.length != 3) {
   alert('Your credit card CVV must be 3 digits long');
   CvvInput.style.borderColor = 'red';
 }
-
-
+}
+// Start cut here
 
 // User must select atleast one checkbox in the register for activities section
 const allCheckBoxes = document.getElementsByName('choice');
