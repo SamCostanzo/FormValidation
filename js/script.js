@@ -95,6 +95,27 @@ if(EW.checked){
 }
 });
 
+// Same thing as above, but for the JS libraries workshop and the Node.js workshop
+const JSLW = document.getElementById('JSLW');
+const NODEWS = document.getElementById('NODEWS');
+
+JSLW.addEventListener('change', () => {
+if(JSLW.checked){
+  NODEWS.setAttribute('disabled', true);
+} else {
+  NODEWS.removeAttribute('disabled');
+}
+});
+
+NODEWS.addEventListener('change', () => {
+if(NODEWS.checked){
+  JSLW.setAttribute('disabled', true);
+} else {
+  JSLW.removeAttribute('disabled');
+}
+});
+
+
 
 // Running total for activities section. STILL WIP
 // const events = document.getElementsByClassName('checkbox');
@@ -142,21 +163,22 @@ paymentSelect.addEventListener('change', () => {
 });
 
 
+
+
+
+
 // FORM VALIDATION************************************
 const RegisterButton = document.getElementById('registerButton');
-// IDEA-turn the border color of the name input red if left blank
-// REMINDER-nameField is already declared at the top
 
-
-// Function to check for the top nameField being left blank
 function validation() {
   if(nameField.value.length == 0) {
   nameField.style.borderColor = 'red';
   nameField.placeholder = 'Please enter your name';
-  // Below was the code for adding a label in the HTML. Saved here just incase. Putting error message in placeholder instead.
-  // nameError.textContent = 'Please fill this out';
-  // nameError.style.color = 'red';
-  event.preventDefault();
+  // Space below to try creating HTML element and a text node and appending it
+  // const paragraph = document.createElement('p');
+  // const textNode = document.createElement('Please fill out your name');
+  // paragraph.appendChild(textNode);
+  // nameField.appendChild(textNode);
   nameField.focus();
 }
 // Same thing as above, but on the email field. Input turns red if left blank
@@ -165,17 +187,8 @@ if(emailInput.value.length == 0) {
   emailInput.style.borderColor = 'red';
   emailInput.placeholder = 'Please enter your Email';
 }
-
-// REMINDER that we are still inside the validation function :)
-
-
-// TRY THIS! Try warping from here to line 220 in a if statement so it only runs if credit card option is selected.
-// const paymentSelect = document.getElementById('x');
 const selectedValue = paymentSelect.value;
-// IF VALIDATION BREAKS, GET RID OF IF SATEMENT ON LINE BELOW
 if(selectedValue == 'credit card'){
-// If credit card option is chosen, user must provide a credit card number, zip code, and three digit CVV
-// Selecting the three inputs
 const creditCardNumberInput = document.getElementById('cc-num');
 const zipCodeInput = document.getElementById('zip');
 const CvvInput = document.getElementById('cvv');
@@ -194,35 +207,24 @@ if(CvvInput.value.length == 0){
   CvvInput.style.borderColor = 'red';
   CvvInput.placeholder = 'Please fill out';
 };
-
 // Check that the credit card number is between 13 and 16 digits
-// Store users submited credit card number in userCreditCardNumber
 const userCreditCardNumber = creditCardNumberInput.value;
 if(userCreditCardNumber.length <= 12) {
   creditCardNumberInput.style.borderColor = 'red';
-  alert('Your credit card number must be between 13 and 16 digits');
 }
 if(userCreditCardNumber.length > 16) {
   creditCardNumberInput.style.borderColor = 'red';
-  alert('Your credit card number must be between 13 and 16 digits');
 }
-
 // Check that the users zip code is exactly 5 digits 
 const userZipCode = zipCodeInput.value;
 if(userZipCode.length != 5) {
-  alert('Your zip code must be 5 digits long');
   zipCodeInput.style.borderColor = 'red';
 }
-
-// Checks that the users credit card CVV is exactly 3 digits
 const userCvv = CvvInput.value;
 if(userCvv.length != 3) {
-  alert('Your credit card CVV must be 3 digits long');
   CvvInput.style.borderColor = 'red';
 }
 }
-// Start cut here
-
 // User must select atleast one checkbox in the register for activities section
 const allCheckBoxes = document.getElementsByName('choice');
 var hasChecked = false;
@@ -233,14 +235,15 @@ for(var i = 0; i < allCheckBoxes.length; i++) {
   }
 }
 if(hasChecked == false){
-  alert('Please select at least one activity to attend');
   return false;
 }
   return true;
-}  // END OF VALIDATION FUNCTION
 
 
 
+// FINAL check to return true if everything validates
+
+}  // END OF VALIDATION FUNCTION. 
 
 // Function to check if email address formatted correctly. Inspired by Stackoverflow. Function is called in eventlistener below 
 function validateEmail(email) 
@@ -248,13 +251,9 @@ function validateEmail(email)
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
-
-
 // Again, putting the function above into an event listener on the register button at the bottom.
+// Calling each function inside a conditional, so that if any don't validate, then preventDefault is called, stoping the form submission.
 RegisterButton.addEventListener('click', () => {
   validation()
   validateEmail()
 });
-
-// IDEA for getting credit card checks working only when credit card option is selected...
-// Move that code to a seperate function and call it in a if statement on an event listener on register button.
