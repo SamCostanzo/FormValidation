@@ -3,6 +3,9 @@ const jobRoleSelectList = document.getElementById('title');
 const otherInput = document.getElementById('other-title');
 const shirtColorList = document.getElementById('color');
 const nameField = document.getElementById('name');
+const creditCardNumberInput = document.getElementById('cc-num');
+const zipCodeInput = document.getElementById('zip');
+const CvvInput = document.getElementById('cvv');
 // Gives the focus to the first input field when the page is loaded
 nameField.focus();
 // Hides the "other" input feild so we can choose when to display it. 
@@ -168,9 +171,10 @@ paymentSelect.addEventListener('change', () => {
 
 
 // FORM VALIDATION************************************
+// Each validation is broken into each own function
 const RegisterButton = document.getElementById('registerButton');
 
-function validation() {
+function validationNameField() {
   if(nameField.value.length == 0) {
   nameField.style.borderColor = 'red';
   nameField.placeholder = 'Please enter your name';
@@ -180,80 +184,174 @@ function validation() {
   // paragraph.appendChild(textNode);
   // nameField.appendChild(textNode);
   nameField.focus();
+  console.log('Please enter a name');
+  return false;
+} else {
+  return true;
 }
-// Same thing as above, but on the email field. Input turns red if left blank
+}
+
+
+
+// Email validation
+function validationEmailField(){
 const emailInput = document.getElementById('mail');
 if(emailInput.value.length == 0) {
   emailInput.style.borderColor = 'red';
   emailInput.placeholder = 'Please enter your Email';
+  console.log('Please enter your email');
+  return false;
+} else {
+  return true;
 }
+}
+
+// To check if credit card input left blank
+function validationCCnumber(){
 const selectedValue = paymentSelect.value;
-if(selectedValue == 'credit card'){
-const creditCardNumberInput = document.getElementById('cc-num');
-const zipCodeInput = document.getElementById('zip');
-const CvvInput = document.getElementById('cvv');
-// Checking for credit card input
+// if(selectedValue == 'credit card'){
+// Not sure what the above was. Leave it for now
 if(creditCardNumberInput.value.length == 0){
   creditCardNumberInput.style.borderColor = 'red';
   creditCardNumberInput.placeholder = 'Please enter your credit card number';
-};
+  console.log('Enter your credit card number');
+  return false;
+} else {
+  return true;
+}
+// }
+}
+
+
+
 // Checking for zip code input
+function validationZipCode(){
 if(zipCodeInput.value.length == 0){
   zipCodeInput.style.borderColor = 'red';
   zipCodeInput.placeholder = 'Please fill out';
-};
+  console.log('Enter your zip code');
+  return false;
+} else {
+  return true;
+}
+}
+
+
+
 // Checking for CVV input
+function validationCVV(){
 if(CvvInput.value.length == 0){
   CvvInput.style.borderColor = 'red';
   CvvInput.placeholder = 'Please fill out';
-};
+  console.log('Please enter your CVV number');
+  return false;
+} else {
+  return true;
+}
+}
+
+
+
 // Check that the credit card number is between 13 and 16 digits
+function validationCreditCardCorrectDigits(){
 const userCreditCardNumber = creditCardNumberInput.value;
 if(userCreditCardNumber.length <= 12) {
   creditCardNumberInput.style.borderColor = 'red';
+  console.log('Credit card number must be at least 13 digits long');
+  return false;
 }
-if(userCreditCardNumber.length > 16) {
+else if(userCreditCardNumber.length > 16) {
   creditCardNumberInput.style.borderColor = 'red';
+  console.log('Credit card number must no longer than 16 digits long');
+  return false;
+} else {
+  return true;
 }
+}
+
+
 // Check that the users zip code is exactly 5 digits 
+function validationZipCodeCorrectDigits(){
 const userZipCode = zipCodeInput.value;
 if(userZipCode.length != 5) {
   zipCodeInput.style.borderColor = 'red';
+  console.log('zip code is not 5 digits');
+  return false;
+} else {
+  console.log('zip code is exactly 5 digits');
+  return true;
 }
+}
+
+function validationCvvCorectDigits(){
 const userCvv = CvvInput.value;
 if(userCvv.length != 3) {
   CvvInput.style.borderColor = 'red';
+  return false;
+  console.log('CVV must be 3 exactly digits long');
+} else {
+  console.log('CVV is exactly 3 digits long');
+  return true;
 }
 }
+
+
+
+
 // User must select atleast one checkbox in the register for activities section
+function validationAtleastOneCheckboxChecked(){
 const allCheckBoxes = document.getElementsByName('choice');
 var hasChecked = false;
 for(var i = 0; i < allCheckBoxes.length; i++) {
   if(allCheckBoxes[i].checked){
     hasChecked = true;
+    alert('You have checked at least one checkbox');
     break;
   }
 }
 if(hasChecked == false){
   return false;
-}
+  // Insert any error messeges here?
+  alert('You must check one checkbox');
+} else{
   return true;
+}
+}
 
 
-
-// FINAL check to return true if everything validates
-
-}  // END OF VALIDATION FUNCTION. 
-
-// Function to check if email address formatted correctly. Inspired by Stackoverflow. Function is called in eventlistener below 
-function validateEmail(email) 
-{
+// Function to check if email address formatted correctly. Inspired by Stackoverflow. 
+function validationEmailFormatedCorrectly(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
-// Again, putting the function above into an event listener on the register button at the bottom.
 // Calling each function inside a conditional, so that if any don't validate, then preventDefault is called, stoping the form submission.
+
+
+// Trying putting all the validation functions into one function to call
+function callAllFunctions(){
+  validationNameField()
+  validationEmailFormatedCorrectly()
+  validationEmailField()
+  validationCCnumber()
+  validationZipCode()
+  validationCVV()
+  validationCreditCardCorrectDigits()
+  validationAtleastOneCheckboxChecked()
+  validationZipCodeCorrectDigits()
+  validationCvvCorectDigits()
+  // If any of the above tests return a false value, stop the submission of the form. Otherwise, submit the form.
+  // if(callAllFunctions == false){
+  //   event.preventDefault();
+  // } else {
+  //   alert('Yay!');
+  // }
+}
+
+
+// FINALLY!!!
 RegisterButton.addEventListener('click', () => {
-  validation()
-  validateEmail()
+  event.preventDefault();
+  callAllFunctions()
+  
 });
+
