@@ -87,7 +87,7 @@ if(JSFW.checked){
     EW.setAttribute('disabled', true);
 } else {
     EW.removeAttribute('disabled');
-}
+  }
 });
 
 EW.addEventListener('change', () => {
@@ -95,7 +95,7 @@ if(EW.checked){
   JSFW.setAttribute('disabled', true);
 } else {
   JSFW.removeAttribute('disabled');
-}
+  }
 });
 
 // Same thing as above, but for the JS libraries workshop and the Node.js workshop
@@ -107,7 +107,7 @@ if(JSLW.checked){
   NODEWS.setAttribute('disabled', true);
 } else {
   NODEWS.removeAttribute('disabled');
-}
+  }
 });
 
 NODEWS.addEventListener('change', () => {
@@ -115,7 +115,7 @@ if(NODEWS.checked){
   JSLW.setAttribute('disabled', true);
 } else {
   JSLW.removeAttribute('disabled');
-}
+  }
 });
 
 
@@ -158,7 +158,7 @@ if(selectedValue === 'credit card') {
   bitcoinInfo.style.display = 'block';
   payPalInfo.style.display = 'none';
   creditCardDiv.style.display = 'none';
-}
+  }
 }
 // Put the above function in an event listener on the select menu
 paymentSelect.addEventListener('change', () => {
@@ -188,7 +188,7 @@ function validationNameField() {
   return false;
 } else {
   return true;
-}
+  }
 }
 
 
@@ -203,13 +203,12 @@ if(emailInput.value.length == 0) {
   return false;
 } else {
   return true;
-}
+  }
 }
 
 // To check if credit card input left blank
 function validationCCnumber(){
-const selectedValue = paymentSelect.value;
-// if(selectedValue == 'credit card'){
+
 // Not sure what the above was. Leave it for now
 if(creditCardNumberInput.value.length == 0){
   creditCardNumberInput.style.borderColor = 'red';
@@ -218,8 +217,7 @@ if(creditCardNumberInput.value.length == 0){
   return false;
 } else {
   return true;
-}
-// }
+  }
 }
 
 
@@ -233,7 +231,7 @@ if(zipCodeInput.value.length == 0){
   return false;
 } else {
   return true;
-}
+  }
 }
 
 
@@ -247,7 +245,7 @@ if(CvvInput.value.length == 0){
   return false;
 } else {
   return true;
-}
+  }
 }
 
 
@@ -266,7 +264,7 @@ else if(userCreditCardNumber.length > 16) {
   return false;
 } else {
   return true;
-}
+  }
 }
 
 
@@ -280,7 +278,7 @@ if(userZipCode.length != 5) {
 } else {
   console.log('zip code is exactly 5 digits');
   return true;
-}
+  }
 }
 
 function validationCvvCorectDigits(){
@@ -292,7 +290,7 @@ if(userCvv.length != 3) {
 } else {
   console.log('CVV is exactly 3 digits long');
   return true;
-}
+  }
 }
 
 
@@ -315,7 +313,7 @@ if(hasChecked == false){
   alert('You must check one checkbox');
 } else{
   return true;
-}
+  }
 }
 
 
@@ -323,7 +321,7 @@ if(hasChecked == false){
 function validationEmailFormatedCorrectly(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
-}
+  }
 // Calling each function inside a conditional, so that if any don't validate, then preventDefault is called, stoping the form submission.
 
 
@@ -332,13 +330,8 @@ function callAllFunctions(){
   validationNameField()
   validationEmailFormatedCorrectly()
   validationEmailField()
-  validationCCnumber()
-  validationZipCode()
-  validationCVV()
-  validationCreditCardCorrectDigits()
   validationAtleastOneCheckboxChecked()
-  validationZipCodeCorrectDigits()
-  validationCvvCorectDigits()
+  
   // If any of the above tests return a false value, stop the submission of the form. Otherwise, submit the form.
   // if(callAllFunctions == false){
   //   event.preventDefault();
@@ -349,9 +342,23 @@ function callAllFunctions(){
 
 
 // FINALLY!!!
-RegisterButton.addEventListener('click', () => {
+RegisterButton.addEventListener('submit', (event) => {
   event.preventDefault();
-  callAllFunctions()
+ 
+  validationNameField()
+  if(validationNameField == true) {
+    event.submit
+  }
   
+  // For when credit card option is chosen. Credit card related functions are put here
+  const selectedValue = paymentSelect.value;
+  if(selectedValue == 'credit card'){
+    validationCCnumber()
+    validationZipCode()
+    validationCVV()
+    validationCreditCardCorrectDigits()
+    validationZipCodeCorrectDigits()
+    validationCvvCorectDigits()
+  }
 });
 
