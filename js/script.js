@@ -331,34 +331,65 @@ function callAllFunctions(){
   validationEmailFormatedCorrectly()
   validationEmailField()
   validationAtleastOneCheckboxChecked()
-  
-  // If any of the above tests return a false value, stop the submission of the form. Otherwise, submit the form.
-  // if(callAllFunctions == false){
-  //   event.preventDefault();
-  // } else {
-  //   alert('Yay!');
-  // }
 }
 
 
+
+
+
 // FINALLY!!!
-RegisterButton.addEventListener('submit', (event) => {
+// Trying to put each validation function inside a statement that only alows submission if that function returns true (nothing is wrong with the users info) and 
+// stop it if returns as false
+const form = document.getElementById('form');
+form.addEventListener('submit', (event) => {
   event.preventDefault();
  
-  validationNameField()
-  if(validationNameField == true) {
-    event.submit
-  }
+  if(!validationNameField()) return true; {
+    event.submit;
+  } 
+
+
+  if(!validationEmailField()) return true; {
+    event.submit;
+  } 
   
-  // For when credit card option is chosen. Credit card related functions are put here
-  const selectedValue = paymentSelect.value;
-  if(selectedValue == 'credit card'){
-    validationCCnumber()
-    validationZipCode()
-    validationCVV()
-    validationCreditCardCorrectDigits()
-    validationZipCodeCorrectDigits()
-    validationCvvCorectDigits()
-  }
+  if(!validationAtleastOneCheckboxChecked()) return true; {
+    event.submit;
+  } 
+   
+// Credit Card checks
+
+  if(!validationCCnumber()) return true; {
+    event.submit;
+  } 
+
+  if(!validationZipCode()) return true; {
+    event.submit;
+  } 
+
+  if(!validationCVV()) return true; {
+    event.submit;
+  } 
+
+  if(!validationCreditCardCorrectDigits()) return true; {
+    event.submit;
+  } 
+
+  if(!validationZipCodeCorrectDigits()) return true; {
+    event.submit;
+  } 
+
+  if(!validationCvvCorectDigits()) return true; {
+    event.submit;
+  } 
+
+
 });
 
+ // For when credit card option is chosen. Credit card related functions are put here
+ // Not sure if this is correct?
+  const selectedValue = paymentSelect.value;
+  if(selectedValue == 'credit card'){
+    
+   
+  }
