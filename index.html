@@ -16,7 +16,7 @@
       <h1>Full Stack Conf</h1>
     </header>
 
-    <form action="index.html" method="post" id="form">
+    <form action="index.html" method="post" id="form" name="listForm">
               
       <fieldset>         
         <legend>Basic Info</legend>
@@ -80,14 +80,14 @@
 
           <fieldset class="activities">
             <legend>Register for Activities</legend>
-            <label><input type="checkbox" value="200" name="choice" class="checkbox"> Main Conference — $200</label>
-            <label><input type="checkbox" value="100" name="choice" class="checkbox" id="JSFW"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
-            <label><input type="checkbox" value="100" name="choice" class="checkbox" id="JSLW"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
-            <label><input type="checkbox" value="100" name="choice" class="checkbox" id="EW"> Express Workshop — Tuesday 9am-12pm, $100</label>
-            <label><input type="checkbox" value="100" name="choice" class="checkbox" id="NODEWS"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
-            <label><input type="checkbox" value="100" name="choice" class="checkbox"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
-            <label><input type="checkbox" value="100" name="choice" class="checkbox"> npm Workshop — Wednesday 1pm-4pm, $100</label>
-
+            <label><input type="checkbox" value="200" name="choice" class="checkbox" onchange="checkTotal()"> Main Conference — $200</label>
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()" id="JSFW"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()" id="JSLW"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()" id="EW"> Express Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()" id="NODEWS"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
+            <label><input type="checkbox" value="100" name="choice" class="checkbox" onchange="checkTotal()"> npm Workshop — Wednesday 1pm-4pm, $100</label>
+            Total: <input type="text" size="2" name="total" value="0"/>
 
             <!-- Just to save the 'names' if we need to add them back in later -->
             <!-- <label><input type="checkbox" value="200" name="all"> Main Conference — $200</label>

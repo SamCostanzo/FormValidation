@@ -21,7 +21,6 @@ function showHideOtherInput() {
     }
 }
 
-
 // T-SHIRT INFO***********************************************
 // Function to display the correct options when a shirt is selected. Thanks Redmond! :)
 function shirtThemeAndColor() {
@@ -119,16 +118,17 @@ if(NODEWS.checked){
 });
 
 
-
-// Running total for activities section. STILL WIP
-// const events = document.getElementsByClassName('checkbox');
-const costLabel = document.createElement('label');
-// Append costLabel to activities
-const cost = ''; 
-const checkbox = document.querySelectorAll('checkbox');
-
-
-
+// Running total for activities section. Called in HTML
+function checkTotal() {
+  document.listForm.total.value = '';
+  var sum = 0;
+  for (i=0;i<document.listForm.choice.length;i++) {
+    if (document.listForm.choice[i].checked) {
+      sum = sum + parseInt(document.listForm.choice[i].value);
+    }
+  }
+  document.listForm.total.value = sum;
+}
 
 
 // Payment Info******************************************
@@ -171,36 +171,27 @@ paymentSelect.addEventListener('change', () => {
 
 
 // FORM VALIDATION************************************
-// Each validation is broken into each own function
+// Each function checks for a specific part of the form. All functions are called at the bottom in the submit event handeler
 const RegisterButton = document.getElementById('registerButton');
 
 function validationNameField() {
   if(nameField.value.length == 0) {
   nameField.style.borderColor = 'red';
   nameField.placeholder = 'Please enter your name';
-  // Space below to try creating HTML element and a text node and appending it
-  // const paragraph = document.createElement('p');
-  // const textNode = document.createElement('Please fill out your name');
-  // paragraph.appendChild(textNode);
-  // nameField.appendChild(textNode);
   nameField.focus();
-  console.log('Please enter a name');
-  return false;
+  event.preventDefault();
 } else {
   return true;
   }
 }
 
-
-
-// Email validation
+// Check for email input
 function validationEmailField(){
 const emailInput = document.getElementById('mail');
 if(emailInput.value.length == 0) {
   emailInput.style.borderColor = 'red';
   emailInput.placeholder = 'Please enter your Email';
-  console.log('Please enter your email');
-  return false;
+  event.preventDefault();
 } else {
   return true;
   }
@@ -208,33 +199,26 @@ if(emailInput.value.length == 0) {
 
 // To check if credit card input left blank
 function validationCCnumber(){
-
-// Not sure what the above was. Leave it for now
 if(creditCardNumberInput.value.length == 0){
   creditCardNumberInput.style.borderColor = 'red';
   creditCardNumberInput.placeholder = 'Please enter your credit card number';
   console.log('Enter your credit card number');
-  return false;
+  event.preventDefault();
 } else {
   return true;
   }
 }
-
-
 
 // Checking for zip code input
 function validationZipCode(){
 if(zipCodeInput.value.length == 0){
   zipCodeInput.style.borderColor = 'red';
   zipCodeInput.placeholder = 'Please fill out';
-  console.log('Enter your zip code');
-  return false;
+  event.preventDefault();
 } else {
   return true;
   }
 }
-
-
 
 // Checking for CVV input
 function validationCVV(){
@@ -242,58 +226,53 @@ if(CvvInput.value.length == 0){
   CvvInput.style.borderColor = 'red';
   CvvInput.placeholder = 'Please fill out';
   console.log('Please enter your CVV number');
-  return false;
+  
+  event.preventDefault();
 } else {
   return true;
   }
 }
-
-
 
 // Check that the credit card number is between 13 and 16 digits
 function validationCreditCardCorrectDigits(){
 const userCreditCardNumber = creditCardNumberInput.value;
 if(userCreditCardNumber.length <= 12) {
   creditCardNumberInput.style.borderColor = 'red';
-  console.log('Credit card number must be at least 13 digits long');
-  return false;
+  alert('Credit card number must be at least 13 digits long, and no longer than 16');
+  event.preventDefault();
 }
 else if(userCreditCardNumber.length > 16) {
   creditCardNumberInput.style.borderColor = 'red';
-  console.log('Credit card number must no longer than 16 digits long');
-  return false;
+  alert('Credit card number must be at least 13 digits long, and no longer than 16');
+  event.preventDefault();
 } else {
   return true;
   }
 }
-
 
 // Check that the users zip code is exactly 5 digits 
 function validationZipCodeCorrectDigits(){
 const userZipCode = zipCodeInput.value;
 if(userZipCode.length != 5) {
   zipCodeInput.style.borderColor = 'red';
-  console.log('zip code is not 5 digits');
-  return false;
+  alert('Your zip code must be exactly 5 digits long');
+  event.preventDefault();
 } else {
-  console.log('zip code is exactly 5 digits');
   return true;
   }
 }
 
+// Check if CVV number is exactly 3 digits
 function validationCvvCorectDigits(){
 const userCvv = CvvInput.value;
 if(userCvv.length != 3) {
   CvvInput.style.borderColor = 'red';
-  return false;
-  console.log('CVV must be 3 exactly digits long');
+  event.preventDefault();
+  alert('Your CVV must be 3 exactly digits long');
 } else {
-  console.log('CVV is exactly 3 digits long');
   return true;
   }
 }
-
-
 
 
 // User must select atleast one checkbox in the register for activities section
@@ -303,93 +282,42 @@ var hasChecked = false;
 for(var i = 0; i < allCheckBoxes.length; i++) {
   if(allCheckBoxes[i].checked){
     hasChecked = true;
-    alert('You have checked at least one checkbox');
     break;
   }
 }
 if(hasChecked == false){
-  return false;
-  // Insert any error messeges here?
-  alert('You must check one checkbox');
+  event.preventDefault();
+  alert('You must register for at least one event');
 } else{
   return true;
   }
 }
-
 
 // Function to check if email address formatted correctly. Inspired by Stackoverflow. 
 function validationEmailFormatedCorrectly(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
   }
-// Calling each function inside a conditional, so that if any don't validate, then preventDefault is called, stoping the form submission.
-
-
-// Trying putting all the validation functions into one function to call
-function callAllFunctions(){
-  validationNameField()
-  validationEmailFormatedCorrectly()
-  validationEmailField()
-  validationAtleastOneCheckboxChecked()
-}
-
-
-
-
 
 // FINALLY!!!
-// Trying to put each validation function inside a statement that only alows submission if that function returns true (nothing is wrong with the users info) and 
-// stop it if returns as false
 const form = document.getElementById('form');
 form.addEventListener('submit', (event) => {
-  event.preventDefault();
- 
-  if(!validationNameField()) return true; {
-    event.submit;
-  } 
-
-
-  if(!validationEmailField()) return true; {
-    event.submit;
-  } 
+  validationNameField()
+  validationEmailField()
+  validationEmailFormatedCorrectly()
+  validationAtleastOneCheckboxChecked()
   
-  if(!validationAtleastOneCheckboxChecked()) return true; {
-    event.submit;
-  } 
-   
-// Credit Card checks
-
-  if(!validationCCnumber()) return true; {
-    event.submit;
-  } 
-
-  if(!validationZipCode()) return true; {
-    event.submit;
-  } 
-
-  if(!validationCVV()) return true; {
-    event.submit;
-  } 
-
-  if(!validationCreditCardCorrectDigits()) return true; {
-    event.submit;
-  } 
-
-  if(!validationZipCodeCorrectDigits()) return true; {
-    event.submit;
-  } 
-
-  if(!validationCvvCorectDigits()) return true; {
-    event.submit;
-  } 
-
-
-});
-
- // For when credit card option is chosen. Credit card related functions are put here
- // Not sure if this is correct?
+// Credit card related functions are called here, so they are only ran when the credit card option is selected
   const selectedValue = paymentSelect.value;
   if(selectedValue == 'credit card'){
-    
-   
+    validationCCnumber()
+    validationZipCode()
+    validationCVV()
+    validationCreditCardCorrectDigits()
+    validationZipCodeCorrectDigits()
+    validationCvvCorectDigits()
   }
+});
+
+ 
+  
